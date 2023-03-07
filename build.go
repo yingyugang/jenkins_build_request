@@ -75,6 +75,7 @@ func RequestBuild(ch <-chan time.Time) {
 							url = "http://127.0.0.1:8080/job/unity-climber-client-ios/" + build.Brunch + "/stop"
 						}
 						data := `{}`
+						fmt.Printf("url:%v\n", url)
 						resp1, err3 := http.Post(url, "application/json", bytes.NewBufferString(data))
 						if err3 != nil {
 							fmt.Printf("RequestBuild err:%v\n", err3)
