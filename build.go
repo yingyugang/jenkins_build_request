@@ -51,12 +51,12 @@ func RequestBuild(ch <-chan time.Time) {
 					var url = ""
 					switch build.Target {
 					case "ios":
-						url = "http://127.0.0.1:8080/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=" + build.Brunch
+						url = "http://127.0.0.1:8080/job/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=" + build.Brunch
 					case "battle_server":
-						url = "http://127.0.0.1:8080/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=" + build.Brunch
+						url = "http://127.0.0.1:8080/job/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=" + build.Brunch
 					}
 					if build.Target == "ios" {
-						url = "http://127.0.0.1:8080/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=" + build.Brunch
+						url = "http://127.0.0.1:8080/job/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=" + build.Brunch
 					}
 					_, err3 := http.Get(url)
 					if err3 != nil {
