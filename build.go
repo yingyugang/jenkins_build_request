@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -59,22 +60,32 @@ func RequestBuild(ch <-chan time.Time) {
 						if build.Target == "ios" {
 							url = "http://127.0.0.1:8080/job/unity-climber-client-ios/buildWithParameters?token=11db88c014135c00b7c5066c73c8ee9478&brunch=" + build.Brunch
 						}
+						resp1, err3 := http.Get(url)
+						if err3 != nil {
+							fmt.Printf("RequestBuild err:%v\n", err3)
+						}
+						content1, err4 := ioutil.ReadAll(resp1.Body)
+						if err4 != nil {
+							fmt.Printf("RequestBuild err:%v\n", err4)
+						}
+						fmt.Printf("RequestBuild:%v\n", string(content1))
 					} else if build.Build == "stop" {
 						switch build.Target {
 						case "ios":
 							url = "http://127.0.0.1:8080/job/unity-climber-client-ios/" + build.Brunch + "/stop"
 						}
+						data := `{}`
+						resp1, err3 := http.Post(url, "application/json", bytes.NewBufferString(data))
+						if err3 != nil {
+							fmt.Printf("RequestBuild err:%v\n", err3)
+						}
+						content1, err4 := ioutil.ReadAll(resp1.Body)
+						if err4 != nil {
+							fmt.Printf("RequestBuild err:%v\n", err4)
+						}
+						fmt.Printf("RequestBuild:%v\n", string(content1))
 					}
 
-					resp1, err3 := http.Get(url)
-					if err3 != nil {
-						fmt.Printf("RequestBuild err:%v\n", err3)
-					}
-					content1, err4 := ioutil.ReadAll(resp1.Body)
-					if err4 != nil {
-						fmt.Printf("RequestBuild err:%v\n", err4)
-					}
-					fmt.Printf("RequestBuild:%v\n", string(content1))
 				}
 			}
 
