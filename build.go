@@ -51,22 +51,25 @@ func RequestBuild(ch <-chan time.Time) {
 					var url = ""
 					switch build.Target {
 					case "ios":
-						url = "http://127.0.0.1:8080/job/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=" + build.Brunch
+						url = "http://127.0.0.1:8080/job/unity-climber-client-ios/buildWithParameters?token=11db88c014135c00b7c5066c73c8ee9478&brunch=" + build.Brunch
 					case "battle_server":
-						url = "http://127.0.0.1:8080/job/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=" + build.Brunch
+						url = "http://127.0.0.1:8080/job/climbers-battleserver/buildWithParameters?token=11db88c014135c00b7c5066c73c8ee9478"
 					}
 					if build.Target == "ios" {
-						url = "http://127.0.0.1:8080/job/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=" + build.Brunch
+						url = "http://127.0.0.1:8080/job/unity-climber-client-ios/buildWithParameters?token=11db88c014135c00b7c5066c73c8ee9478&brunch=" + build.Brunch
 					}
-					_, err3 := http.Get(url)
+					resp1, err3 := http.Get(url)
 					if err3 != nil {
 						fmt.Printf("RequestBuild err:%v\n", err3)
 					}
+					content1, err4 := ioutil.ReadAll(resp1.Body)
+					if err4 != nil {
+						fmt.Printf("RequestBuild err:%v\n", err4)
+					}
+					fmt.Printf("RequestBuild err:%v\n", string(content1))
 				}
 			}
 
 		}
 	}
 }
-
-//http://192.168.11.3:8080/unity-climber-client-ios/buildWithParameters?token=yingyugang&brunch=develop
